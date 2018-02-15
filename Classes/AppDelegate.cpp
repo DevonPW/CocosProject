@@ -1,28 +1,29 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
+#include "LevelScene.h"
 
 USING_NS_CC;
 
 AppDelegate::AppDelegate() {
-
 }
 
-AppDelegate::~AppDelegate()
-{
+AppDelegate::~AppDelegate() {
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
 	auto director = Director::getInstance();
+	director->setAnimationInterval(1.0 / 60);
+	director->setDisplayStats(true);
 	auto glview = director->getOpenGLView();
 	if (!glview) {
-		glview = GLViewImpl::create("Hello World");
-		glview->setDesignResolutionSize(1920, 1080, ResolutionPolicy::SHOW_ALL);
-		glview->setFrameSize(960, 540);
+		glview = GLViewImpl::createWithRect("Hello", Rect(0, 0, 1920, 1080), 0.5, false);
+		//glview->setDesignResolutionSize(1280, 720, ResolutionPolicy::SHOW_ALL);
+		//glview->setFrameSize(1280, 720);
 		director->setOpenGLView(glview);
 	}
 
-	auto scene = HelloWorld::createScene();
-	director->runWithScene(scene);
+	auto level = Level::createScene();
+	director->runWithScene(level);
 
 	return true;
 }
