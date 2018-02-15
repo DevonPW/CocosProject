@@ -12,11 +12,11 @@ AppDelegate::~AppDelegate() {
 
 bool AppDelegate::applicationDidFinishLaunching() {
 	auto director = Director::getInstance();
-	director->setAnimationInterval(1.0 / 60);
+	director->setAnimationInterval(1.0 / 30);
 	director->setDisplayStats(true);
 	auto glview = director->getOpenGLView();
 	if (!glview) {
-		glview = GLViewImpl::createWithRect("Hello", Rect(0, 0, 1920, 1080), 0.5, false);
+		glview = GLViewImpl::createWithRect("Hello", Rect(0, 0, 1920, 1080), 1, false);
 		//glview->setDesignResolutionSize(1280, 720, ResolutionPolicy::SHOW_ALL);
 		//glview->setFrameSize(1280, 720);
 		director->setOpenGLView(glview);
@@ -24,6 +24,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	auto level = Level::createScene();
 	director->runWithScene(level);
+
+	//Set up the input handler
+	INPUTS->init();
 
 	return true;
 }
