@@ -1,5 +1,4 @@
 #include "AppDelegate.h"
-#include "HelloWorldScene.h"
 #include "LevelScene.h"
 
 USING_NS_CC;
@@ -12,7 +11,7 @@ AppDelegate::~AppDelegate() {
 
 bool AppDelegate::applicationDidFinishLaunching() {
 	auto director = Director::getInstance();
-	director->setAnimationInterval(1.0 / 30);
+	director->setAnimationInterval(1.0 / 60);
 	director->setDisplayStats(true);
 	auto glview = director->getOpenGLView();
 	if (!glview) {
