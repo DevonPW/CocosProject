@@ -10,7 +10,7 @@ public:
 	Player();
 	~Player();
 
-	static Player* create(const std::string& filename);
+	static Player* create(const std::string& filename = "player.png");
 
 	std::vector<Item> items;//items the player is carrying
 };

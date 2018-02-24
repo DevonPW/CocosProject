@@ -23,7 +23,6 @@ bool Level::init()
 		return false;
 	}
 
-
 	//set the background name before calling setup
 	backgroundName = "mansionPhoto.jpg";
 
@@ -34,20 +33,20 @@ bool Level::init()
 	player->setPosition(200, 25);
 
 	//Walls
-	auto wall = new Wall(Size(25, 650));
-	wall->setPosition(100, 25);
+	auto wall = Wall::create();
+	wall->initObject(Vec2(100,25), Size(25, 650));
 	walls.push_back(wall);
 
-	wall = new Wall(Size(25, 650));
-	wall->setPosition(1075, 25);
+	wall = Wall::create();
+	wall->initObject(Vec2(1075, 25), Size(25, 650));
 	walls.push_back(wall);
 
-	wall = new Wall(Size(1000, 25));
-	wall->setPosition(100, 0);
+	wall = Wall::create();
+	wall->initObject(Vec2(100, 0), Size(1000, 25));
 	walls.push_back(wall);
 
-	wall = new Wall(Size(1000, 25));
-	wall->setPosition(100, 675);
+	wall = Wall::create();
+	wall->initObject(Vec2(100, 675), Size(1000, 25));
 	walls.push_back(wall);
 
 	for (int i = 0; i < walls.size(); i++) {
@@ -55,15 +54,15 @@ bool Level::init()
 	}
 	
 	//Items
-	auto item = new Item;
-	item->sprite->setFlippedX(true);
-	item->setPosition(400, 25);
+	auto item = Item::create();
+	item->initObject(Vec2(400, 25));
+	item->setFlippedX(true);
 	items.push_back(item);
 	mainLayer->addChild(items[0], 3);
 
 	//Enemies
-	auto guard = new Enemy;
-	guard->setPosition(500, 25);
+	auto guard = Enemy::create();
+	guard->initObject(Vec2(500, 25));
 
 	//guard moves automatically
 	auto movement = MoveBy::create(5, Vec2(400, 0));

@@ -37,7 +37,8 @@ void Stage::setup()
 	background->addComponent(border);
 
 	//initializing player
-	player = new Player;
+	player = Player::create();
+	player->initObject();
 	mainLayer->addChild(player, 2);
 
 	//necessary for collision detection
@@ -53,16 +54,19 @@ void Stage::update(float deltaTime)
 {
 	//player movement
 	if (INPUTS->getKey(KeyCode::KEY_D)) {
-		player->setPosition(player->getPosition() + Vec2(3, 0));
-		if (player->sprite->isFlippedX() == true) {
-			player->sprite->setFlippedX(false);
+		player->getPhysicsBody()->applyImpulse(Vec2(2000, 0));
+		if (player->isFlippedX() == true) {
+			player->setFlippedX(false);
 		}
 	}
 	else if (INPUTS->getKey(KeyCode::KEY_A)) {
-		player->setPosition(player->getPosition() + Vec2(-3, 0));
-		if (player->sprite->isFlippedX() == false) {
-			player->sprite->setFlippedX(true);
+		player->getPhysicsBody()->applyImpulse(Vec2(-2000, 0));
+		if (player->isFlippedX() == false) {
+			player->setFlippedX(true);
 		}
+	}
+	else {
+		player->getPhysicsBody()->setVelocity(Vec2(0, 0));
 	}
 
 	//positioning camera node to be below player (adding it as a child of player doesn't work)

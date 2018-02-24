@@ -11,18 +11,15 @@ public:
 	//must overload create function of Sprite to derive class properly
 	static GameObject* create(const std::string& filename);
 
-	void initSprite();
-	void initPhysics();
+	virtual void initObject(Vec2 startPos = Vec2(0,0));
 
 	void initAnimations();
 	Vector<cocos2d::SpriteFrame*> getAnimation(const char *format, int count);//gets animation from sprite sheet
 
-
-	Sprite *sprite = new Sprite;//the objects sprite
-	std::string spriteName;//file name of the sprite
+	GameObject* object;
+	//static std::string spriteName;//file name of the sprite
 	float scale;//scale factor for sprite
 
-	PhysicsBody *body;//the objects physics body
 	int tag;//tag for the physics body, used for collision detection
 	bool dynamic;//set whether bosy will be dynamic or not
 	int category = 1;//category group bitmask for collisions

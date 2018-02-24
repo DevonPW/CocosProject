@@ -20,22 +20,18 @@ GameObject* GameObject::create(const std::string& filename)
 	return nullptr;
 }
 
-void GameObject::initSprite(){
-	this->setAnchorPoint(Vec2(0, 0));
-	//creating sprite
-	sprite = Sprite::create(spriteName);
+void GameObject::initObject(Vec2 startPos){
 	//necessary stuff, will not change between objects:
-	sprite->setAnchorPoint(Vec2(0, 0));
+	this->setAnchorPoint(Vec2(0, 0));
 
-	//not necessary, will change from object to object:
-	sprite->setScale(scale);
+	//set scale of sprite
+	this->setScale(scale);
 
-	this->addChild(sprite);
-}
+	//set position of sprite
+	this->setPosition(startPos);
 
-void GameObject::initPhysics(){
 	//creating physics body
-	body = PhysicsBody::createBox(sprite->getContentSize());
+	auto body = PhysicsBody::createBox(this->getContentSize());
 	//auto size = sprite->getContentSize();
 	//body->setPositionOffset(Vec2(size.width/2, size.height/2));
 
@@ -48,7 +44,7 @@ void GameObject::initPhysics(){
 	body->setContactTestBitmask(0xFFFFFFFF);
 	body->setTag(tag);
 
-	sprite->setPhysicsBody(body);
+	this->setPhysicsBody(body);
 }
 
 void GameObject::initAnimations() {

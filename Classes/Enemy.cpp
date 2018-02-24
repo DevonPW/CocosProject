@@ -3,16 +3,32 @@
 Enemy::Enemy()
 {
 	//sprite properties
-	spriteName = "guard.png";
+	//spriteName = "guard.png";
 	scale = 1.5f;
 	//physics body properties
 	tag = 2;
 	dynamic = true;
+}
 
-	initSprite();//sets the image for the sprite and other properties such as anchor point at (0,0); also creates physics body based on image
 
-	initPhysics();//sets properties of the physics body and attaches it to sprite
+Enemy::~Enemy()
+{
+}
 
+Enemy* Enemy::create(const std::string& filename)
+{
+	Enemy *sprite = new (std::nothrow) Enemy();
+	if (sprite && sprite->initWithFile(filename))
+	{
+		sprite->autorelease();
+		return sprite;
+	}
+	CC_SAFE_DELETE(sprite);
+	return nullptr;
+}
+
+void Enemy::initObject(Vec2 startPos) {
+	GameObject::initObject(startPos);
 	//initializing vision cone
 	vision = Sprite::create("visionCone.png");
 	vision->setScale(0.75);
@@ -27,10 +43,5 @@ Enemy::Enemy()
 	visionBody->setTag(2);
 	vision->setPhysicsBody(visionBody);
 
-	sprite->addChild(vision);
-}
-
-
-Enemy::~Enemy()
-{
+	this->addChild(vision);
 }
